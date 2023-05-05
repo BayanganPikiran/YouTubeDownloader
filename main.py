@@ -12,6 +12,7 @@ stream_choice = StringVar()
 font = ("Arial", 10, 'bold')
 
 
+
 def choose_directory():
     """searches for and sets the output path for the YouTube file download"""
     output_path = filedialog.askdirectory(initialdir="/home/boss_andre/Downloads/")
@@ -21,12 +22,13 @@ def choose_directory():
 
 def create_yt_object():
     """Creates the initial YouTube object with url_entry input"""
-    yt = YouTube(url_entry.get(), on_complete_callback=declare_complete())
+    yt = YouTube(url_entry.get(), on_complete_callback=declare_complete(), use_oauth=True, allow_oauth_cache=True)
     return yt
 
 
 def get_stream():
     """Designates a YouTube object its stream according to the chosen radio button"""
+    stream = None
     yt = create_yt_object()
     chosen_stream = stream_choice.get()
     if chosen_stream == "hi_res":
